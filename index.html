@@ -52,9 +52,10 @@
     .footer { border-radius: 14px; background: linear-gradient(90deg, rgba(50,12,40,.9), rgba(90,20,55,.75)); padding: 8px 14px; display: flex; justify-content: space-between; color: #ffd0e4; font-size: 13px; }
     .photos, .photos-main { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .photo { aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; position: relative; border: 1px solid rgba(255,170,200,.35); }
-    .photos { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr auto; height: 100%; min-height: 0; }
+    .photos { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 100%; min-height: 0; }
     .photos .photo { aspect-ratio: auto; min-height: 0; height: 100%; }
-    .photo.wide { grid-column: 1 / -1; aspect-ratio: 16 / 7; }
+    .photo.wide { grid-column: 1 / -1; aspect-ratio: 16 / 8; min-height: 220px; }
+    .photo.arcos img { object-position: center 78%; }
     .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
     .photo span { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(20,8,18,.62); padding: 6px 8px; font-size: 12px; }
     .photos-main { margin-bottom: 10px; }
@@ -92,10 +93,10 @@
             </div></div>
             <div class="block"><div class="icon">o</div><div>
               <h2>Te amo</h2>
-              <p>A pesar de los momentos difíciles y de los más divertidos, nos queremos mucho. Sé que pasaremos muchas etapas. De verdad considero que podría ser mi relación perfecta. Por eso te amo, mi nina linda.</p>
+              <p>A pesar de los momentos difíciles y de los más divertidos, nos queremos mucho. Sé que pasaremos muchas etapas. De verdad considero que podría ser mi relación perfecta. Por eso te amo, mi niña linda.</p>
             </div></div>
             <div class="banner">Cuando regreses, te voy a esperar con un regalo, porque eres de verdad una persona muy especial. Te mando muchos besitos y muchos corazones.</div>
-            <div class="photo wide" style="margin-top:10px;">
+            <div class="photo wide arcos" style="margin-top:10px;">
               <img src="img/07-arcos-noche.jpg" alt="Arcos de noche">
               <span>Tu viaje de noche</span>
             </div>
@@ -126,7 +127,6 @@
               <div class="photo"><img src="img/03-abrazo-noche.jpg" alt="Abrazo"><span>Juntos</span></div>
               <div class="photo"><img src="img/05-espejo.jpg" alt="Espejo"><span>Nosotros</span></div>
               <div class="photo"><img src="img/04-beso-movimiento.jpg" alt="Beso"><span>Un instante</span></div>
-              <div class="photo wide"><img src="img/08-cena.jpg" alt="Cena"><span>Una cena juntos</span></div>
             </div>
           </article>
           <aside class="panel">
@@ -134,7 +134,11 @@
             <p>Siempre me encantan tus obsequios, tus cartas y los regalos que me has traído. Gracias por tu compañía. Quiero seguir creando muchos más momentos contigo.</p>
             <h2>Hemos vivido de todo</h2>
             <p>Momentos difíciles, momentos divertidos, risas y tambien enojos. Y aquí seguimos, eligiéndonos. Sé que pasaremos muchas etapas, pero juntos.</p>
-            <div class="banner" style="margin-top:12px;">Nos queremos mucho. Tú eres especial, y yo voy a estar aquí cuando vuelvas.</div>
+            <div class="banner" style="margin:10px 0;">Nos queremos mucho. Tú eres especial, y yo voy a estar aquí cuando vuelvas.</div>
+            <div class="photo" style="aspect-ratio:4/5;max-height:280px;">
+              <img src="img/08-cena.jpg" alt="Cena" style="object-position:center 18%;">
+              <span>Una cena juntos</span>
+            </div>
           </aside>
         </div>
       </section>
