@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para ti, Giuliana</title>
+  <style>
+    :root {
+      --pink: #ff8ec4;
+      --pink-2: #ff4fa3;
+      --rose: #ff6b8a;
+      --peach: #ffb38a;
+      --lilac: #d48cff;
+      --text: #fff4f8;
+      --muted: #f0c6d6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Georgia, serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255,110,170,.45), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(212,140,255,.28), transparent 26%),
+        radial-gradient(circle at 78% 82%, rgba(255,140,90,.22), transparent 32%),
+        radial-gradient(circle at 30% 90%, rgba(255,70,140,.18), transparent 30%),
+        linear-gradient(135deg, #2a0b22 0%, #4a1238 38%, #1c0820 70%, #3a0f2c 100%);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,140,190,.35) 0 2px, transparent 3px),
+        radial-gradient(circle, rgba(255,180,120,.25) 0 3px, transparent 4px),
+        radial-gradient(circle, rgba(220,140,255,.28) 0 2px, transparent 3px);
+      background-size: 180px 180px, 260px 260px, 220px 220px;
+      background-position: 10% 20%, 70% 60%, 40% 80%;
+      opacity: .7;
+    }
+    .app {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 16px;
+      padding: 18px;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background: linear-gradient(180deg, rgba(70,18,50,.75), rgba(24,8,22,.88));
+      border: 1px solid rgba(255,140,190,.28);
+      border-radius: 22px;
+      padding: 22px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(255,80,150,.12);
+      position: relative;
+      z-index: 1;
+    }
+    .brand {
+      font-family: Georgia, serif;
+      font-style: italic;
+      color: var(--pink);
+      font-size: 28px;
+      line-height: 1.15;
+    }
+    .brand small { display: block; font-size: 16px; opacity: .85; }
+    .nav button {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 0;
+      color: var(--pink-soft);
+      padding: 11px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .nav button.active {
+      background: linear-gradient(90deg, #c43a78, #ff6aa8);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(255,80,150,.4);
+    }
+    .quote {
+      margin-top: auto;
+      border: 1px solid rgba(255,160,200,.3);
+      border-radius: 16px;
+      padding: 16px;
+      color: #ffd0e4;
+      font-style: italic;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(90,20,60,.4), rgba(40,10,30,.5));
+    }
+    .main {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 12px;
+    }
+    .view { display: none; }
+    .view.active { display: grid; gap: 16px; }
+    .panel {
+      background: linear-gradient(165deg, rgba(90,24,62,.72), rgba(28,10,28,.86) 55%, rgba(48,14,40,.8));
+      border: 1px solid rgba(255,150,200,.32);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 0 50px rgba(255,90,160,.16), inset 0 1px 0 rgba(255,200,220,.15);
+      backdrop-filter: blur(12px);
+      position: relative;
+      z-index: 1;
+    }
+    h1, h2 {
+      font-family: Georgia, serif;
+      font-style: italic;
+      color: #ff9ec8;
+      text-shadow: 0 0 18px rgba(255,90,160,.55), 0 0 4px rgba(255,180,120,.3);
+    }
+    h1 { font-size: 38px; margin-bottom: 14px; text-align: center; }
+    h2 { font-size: 22px; margin-bottom: 10px; }
+    p { color: #f3cddd; line-height: 1.55; margin-bottom: 10px; }
+    .block { display: grid; grid-template-columns: 36px 1fr; gap: 10px; margin: 16px 0; }
+    .icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, #ff6aa8, #d45cff);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(255,90,160,.45);
+    }
+    .banner {
+      border: 1px dashed #ff9ec8;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: #ffe0ee;
+      background: linear-gradient(90deg, rgba(255,90,140,.18), rgba(212,140,255,.12));
+    }
+    .footer {
+      border-radius: 16px;
+      background: linear-gradient(90deg, rgba(50,12,40,.85), rgba(90,20,55,.7), rgba(40,10,30,.85));
+      border: 1px solid rgba(255,150,200,.25);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      color: #ffd0e4;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1.4fr .9fr; gap: 16px; }
+    .photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .photo {
+      min-height: 170px;
+      height: 190px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,170,200,.35);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(255,80,120,.18);
+      position: relative;
+    }
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo span {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      background: rgba(20,8,18,.65);
+      padding: 8px;
+      font-size: 12px;
+      color: #f7d6e6;
+    }
+    .photos-main { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    .photos-main .photo { height: 160px; }
+    .wishes { display: grid; gap: 8px; }
+    .wish { background: linear-gradient(90deg, rgba(255,90,140,.22), rgba(160,60,140,.2)); border-radius: 12px; padding: 10px 12px; }
+    @media (max-width: 980px) {
+      .app, .grid-2 { grid-template-columns: 1fr; }
+      .sidebar { order: 2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Para ti,<br><small>Giuliana ♥</small></div>
+      <nav class="nav">
+        <button class="active" data-view="mensaje">⌂ Mensaje</button>
+        <button data-view="momentos">♥ Momentos</button>
+      </nav>
+      <div class="quote">Eres el amor que me llegó cuando menos lo esperaba.</div>
+    </aside>
+
+    <div class="main">
+      <section id="mensaje" class="view active">
+        <div class="grid-2">
+          <article class="panel">
+            <h1>¡Feliz Cumpleaños, mi niña linda!</h1>
+            <p>Hoy es tu día, 20 de agosto, y quiero que lo disfrutes al máximo, incluso estando lejos. Sé que estás de viaje, viviendo nuevas experiencias y creciendo cada día más.</p>
+
+            <div class="block">
+              <div class="icon">♥</div>
+              <div>
+                <h2>Eres increíble</h2>
+                <p>Eres una chica aplicada, cariñosa, atenta a cada detalle y siempre con una energía que ilumina a todos a tu alrededor.</p>
+              </div>
+            </div>
+            <div class="block">
+              <div class="icon">★</div>
+              <div>
+                <h2>Eres especial para mí</h2>
+                <p>Llegaste a mi vida cuando menos lo esperaba, y desde ese momento todo cambió. Eso sí es amor.</p>
+              </div>
+            </div>
+            <div class="block">
+              <div class="icon">♡</div>
+              <div>
+                <h2>Te amo</h2>
+                <p>De verdad, considero que podríamos tener nuestra relación perfecta. Me haces muy feliz.</p>
+              </div>
+            </div>
+
+            <div class="banner">
+              <span>Cuando regreses, te estaré esperando con un regalo, porque eres de verdad una persona muy especial.</span>
+              <strong>Te amo ♥</strong>
+            </div>
+            <p style="text-align:center;margin-top:16px;color:#ff7eb3;font-style:italic;">Te mando muchos besitos y muchos corazones</p>
+          </article>
+
+          <aside>
+            <div class="photos-main">
+              <div class="photo">
+                <img src="img/06-retrato.jpg" alt="Giuliana">
+                <span>Tú</span>
+              </div>
+              <div class="photo">
+                <img src="img/01-arco.jpg" alt="Viaje">
+                <span>Tu viaje</span>
+              </div>
+            </div>
+            <div class="panel">
+              <h2>Mis deseos para ti</h2>
+              <div class="wishes">
+                <div class="wish">Muchos éxitos en todo lo que hagas.</div>
+                <div class="wish">Que sigas creciendo como la gran persona que eres.</div>
+                <div class="wish">Que disfrutes cada viaje, cada logro y cada sueño que persigas.</div>
+              </div>
+            </div>
+            <div class="panel" style="margin-top:16px;">
+              <p>Sé que estás trabajando con Sisle, viajando, aprendiendo con la beca de Guayme y en muchas actividades más. Me enorgullece verte brillar.</p>
+              <h2>¡Sigue así, mi amor!</h2>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="momentos" class="view">
+        <div class="grid-2">
+          <article class="panel">
+            <h1>Nuestros momentos</h1>
+            <div class="photos">
+              <div class="photo">
+                <img src="img/02-cruz-condor.jpg" alt="Cruz del Cóndor">
+                <span>Cruz del Cóndor</span>
+              </div>
+              <div class="photo">
+                <img src="img/03-abrazo-noche.jpg" alt="Abrazo">
+                <span>Juntos</span>
+              </div>
+              <div class="photo">
+                <img src="img/05-espejo.jpg" alt="Espejo">
+                <span>Nosotros</span>
+              </div>
+              <div class="photo">
+                <img src="img/04-beso-movimiento.jpg" alt="Beso">
+                <span>Un instante</span>
+              </div>
+            </div>
+          </article>
+          <aside class="panel">
+            <h2>Gracias por tanto</h2>
+            <p>Por tus obsequios, tus cartas, los regalos y, sobre todo, por tu compañía. Hemos compartido momentos inolvidables y quiero seguir creando muchos más contigo.</p>
+            <h2>Hemos vivido de todo</h2>
+            <p>Momentos difíciles, momentos divertidos, risas, enojos… y aquí seguimos, eligiéndonos cada día. Sé que pasaremos por muchas etapas, pero juntos.</p>
+          </aside>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>Fecha especial · 20 de Agosto</span>
+        <span>Gracias por existir en mi vida</span>
+        <span>Siempre en mi corazón, estés donde estés.</span>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll(".nav button");
+    const views = document.querySelectorAll(".view");
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        views.forEach(v => v.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.view).classList.add("active");
+      });
+    });
+    /* fotos: img/ en el mismo repo */
+  </script>
+</body>
+</html>
